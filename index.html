@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jordan Elementary Zone | Market Trends 2019–2026 | Jason Kaczmarski Team</title>
+<title>Antioch vs. Nolensville | Portfolio Decision Report | Jason Kaczmarski Team</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
@@ -18,6 +18,10 @@
   --blue-light: #eef3ff;
   --gold: #f0b429;
   --gold-light: #fef9ec;
+  --green: #16a34a;
+  --green-light: #f0fdf4;
+  --orange: #ea580c;
+  --orange-light: #fff7ed;
   --text: #1a1a2e;
   --muted: #64748b;
   --border: #e2e8f0;
@@ -32,6 +36,7 @@ body {
   min-height: 100vh;
 }
 
+/* HEADER */
 .header {
   background: var(--red);
   padding: 16px 24px;
@@ -41,6 +46,7 @@ body {
 }
 .header img { max-width: 200px; }
 
+/* HERO */
 .hero {
   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
   color: white;
@@ -66,7 +72,7 @@ body {
 }
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 5vw, 50px);
+  font-size: clamp(26px, 5vw, 48px);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 10px;
@@ -76,27 +82,24 @@ body {
 .hero-sub {
   font-size: 15px;
   opacity: .8;
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto 20px;
   line-height: 1.6;
   position: relative;
 }
-.hood-tags {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  flex-wrap: wrap;
+.vs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 99px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
   position: relative;
 }
-.hood-tag {
-  background: rgba(255,255,255,.15);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 99px;
-  padding: 5px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .04em;
-}
+.vs-badge .vs { background: var(--gold); color: var(--text); border-radius: 99px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
 
 /* STAT STRIP */
 .stat-strip {
@@ -131,7 +134,9 @@ body {
   line-height: 1;
   margin-bottom: 4px;
 }
-.stat-change { font-size: 12px; font-weight: 600; color: #16a34a; }
+.stat-change { font-size: 12px; font-weight: 600; }
+.stat-change.up { color: var(--green); }
+.stat-change.down { color: var(--orange); }
 .stat-note { font-size: 11px; color: var(--muted); }
 
 /* CONTEXT BANNER */
@@ -211,187 +216,155 @@ body {
 .tab-btn:hover { color: var(--blue); }
 .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
 
-/* NEIGHBORHOOD COMPARE */
-.compare-grid {
+/* SIDE-BY-SIDE PATH CARDS */
+.path-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px 28px;
+}
+.path-card {
+  border-radius: 12px;
+  padding: 22px 24px;
+  border: 2px solid var(--border);
+}
+.path-card.antioch {
+  background: var(--orange-light);
+  border-color: #fed7aa;
+}
+.path-card.nolensville {
+  background: var(--green-light);
+  border-color: #bbf7d0;
+}
+.path-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 14px;
+}
+.path-card.antioch .path-label { color: var(--orange); }
+.path-card.nolensville .path-label { color: var(--green); }
+.path-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.path-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  font-size: 13px;
+}
+.path-row:last-child { border-bottom: none; }
+.path-row .pr-label { color: var(--muted); }
+.path-row .pr-val { font-weight: 600; color: var(--text); }
+.path-row .pr-val.good { color: var(--green); }
+.path-row .pr-val.bad { color: var(--orange); }
+
+/* MAINTENANCE CARD */
+.maint-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px 28px;
+}
+.maint-col {
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+.maint-col.antioch-m { background: var(--orange-light); border-color: #fed7aa; }
+.maint-col.nolen-m { background: var(--green-light); border-color: #bbf7d0; }
+.maint-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 14px;
+}
+.maint-col.antioch-m .maint-title { color: var(--orange); }
+.maint-col.nolen-m .maint-title { color: var(--green); }
+.maint-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.maint-item:last-child { border-bottom: none; }
+.maint-icon { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; }
+.maint-count {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 28px;
+}
+.maint-col.antioch-m .maint-count { color: var(--orange); }
+.maint-col.nolen-m .maint-count { color: var(--green); }
+.maint-desc { color: var(--muted); font-size: 12px; }
+
+.maint-total {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+.maint-col.antioch-m .maint-total { background: #fed7aa; color: var(--orange); }
+.maint-col.nolen-m .maint-total { background: #bbf7d0; color: var(--green); }
+
+.maint-note {
+  padding: 0 28px 24px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* JORDAN ZONE HISTORY */
+.zone-context {
+  padding: 18px 28px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  background: var(--gold-light);
+  border-left: 4px solid var(--gold);
+  margin: 0 28px 24px;
+  border-radius: 0 8px 8px 0;
+}
+.zone-context strong { color: var(--text); }
+
+/* INSIGHT BOXES */
+.insight-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   padding: 24px 28px;
 }
-.compare-card {
+.insight-box {
   background: var(--bg);
   border-radius: 12px;
   padding: 18px 20px;
   border: 1px solid var(--border);
 }
-.compare-card.highlight {
-  background: var(--blue-light);
-  border-color: var(--blue-mid);
-}
-.compare-name {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-.compare-card.highlight .compare-name { color: var(--blue); }
-.compare-stat {
-  margin-bottom: 8px;
-}
-.compare-stat .cs-label {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 2px;
-}
-.compare-stat .cs-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1;
-}
-.compare-stat .cs-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-/* YEAR SLIDER */
-.slider-section {
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: 0 2px 20px rgba(0,0,0,.07);
-  overflow: hidden;
-}
-.slider-header {
-  padding: 22px 28px 16px;
-  border-bottom: 1px solid var(--border);
-}
-.slider-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-}
-.slider-header p { font-size: 13px; color: var(--muted); margin-top: 3px; }
-
-.year-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.year-tabs::-webkit-scrollbar { display: none; }
-.year-tab {
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  white-space: nowrap;
-  transition: all .2s;
-  font-family: 'DM Sans', sans-serif;
-}
-.year-tab:hover { color: var(--blue); background: var(--blue-light); }
-.year-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: var(--blue-light); }
-.year-tab .badge {
-  display: inline-block;
-  font-size: 9px;
-  background: var(--gold);
-  color: var(--text);
-  border-radius: 99px;
-  padding: 1px 5px;
-  margin-left: 4px;
-  font-weight: 700;
-  vertical-align: middle;
-}
-
-.year-panel {
-  display: none;
-  padding: 28px;
-  animation: fadeIn .25s ease;
-}
-.year-panel.active { display: block; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.year-panel-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: start;
-}
-
-.year-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-.year-stat-box {
-  background: var(--bg);
-  border-radius: 10px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-}
-.year-stat-box .ys-label {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--muted);
-  margin-bottom: 5px;
-}
-.year-stat-box .ys-value {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--blue);
-  line-height: 1;
-}
-.year-stat-box .ys-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-
-.year-context {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  padding: 16px;
-  background: var(--gold-light);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 8px 8px 0;
-  margin-bottom: 16px;
-}
-.year-context strong { color: var(--text); }
-
-.avg-note {
-  font-size: 12px;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 8px;
-  padding: 10px 14px;
-  color: #1e40af;
-  line-height: 1.5;
-  margin-bottom: 14px;
-}
-
-.view-report-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: var(--blue);
-  color: white;
-  border-radius: 8px;
+.insight-box.blue { background: var(--blue-light); border-color: #bfdbfe; }
+.insight-box.green { background: var(--green-light); border-color: #bbf7d0; }
+.insight-box.gold { background: var(--gold-light); border-color: #fde68a; }
+.insight-icon { font-size: 24px; margin-bottom: 10px; }
+.insight-title {
   font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background .2s, transform .15s;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
 }
-.view-report-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
-.view-report-btn svg { width: 14px; height: 14px; }
+.insight-body { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
 /* CTA */
 .cta-card {
@@ -422,7 +395,7 @@ body {
 .cta-card p {
   font-size: 15px;
   opacity: .85;
-  max-width: 500px;
+  max-width: 520px;
   margin: 0 auto 24px;
   line-height: 1.6;
 }
@@ -459,13 +432,10 @@ body {
   line-height: 1.5;
 }
 
-@media (max-width: 860px) {
-  .compare-grid { grid-template-columns: 1fr; }
-}
 @media (max-width: 700px) {
   .stat-strip-inner { grid-template-columns: 1fr 1fr; }
   .stat-item:nth-child(2) { border-right: none; }
-  .year-panel-grid { grid-template-columns: 1fr; }
+  .path-grid, .maint-grid, .insight-grid { grid-template-columns: 1fr; }
   .cta-card { padding: 28px 20px; }
   .chart-wrap { padding: 16px 12px 20px; }
 }
@@ -480,20 +450,13 @@ body {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Nolensville & Brentwood, TN &nbsp;·&nbsp; School Zone Market Report</div>
-  <h1>Jordan Elementary Zone<br><em>Market History</em></h1>
-  <p class="hero-sub">Eight years of closed sales data — 2019 through early 2026 — across every neighborhood zoned for one of Williamson County's most sought-after elementary schools.</p>
-  <div class="hood-tags">
-    <span class="hood-tag">Scales Farmstead</span>
-    <span class="hood-tag">Taramore</span>
-    <span class="hood-tag">Brooksbank Estates</span>
-    <span class="hood-tag">The Farm at Clovercroft</span>
-    <span class="hood-tag">Tuscany Hills</span>
-    <span class="hood-tag">Morgan Farms</span>
-    <span class="hood-tag">Sonoma</span>
-    <span class="hood-tag">Cromwell</span>
-    <span class="hood-tag">Rosebrooke</span>
-    <span class="hood-tag">+ more</span>
+  <div class="hero-eyebrow">Portfolio Strategy Report &nbsp;·&nbsp; Williamson County vs. Davidson County</div>
+  <h1>Antioch vs. <em>Nolensville</em><br>A Portfolio Decision</h1>
+  <p class="hero-sub">A side-by-side analysis of holding three Antioch rental properties versus converting that equity into a single-family home in the Jordan Elementary zone — Scales Farmstead or Taramore.</p>
+  <div class="vs-badge">
+    <span>3 Antioch Rentals (~$900K)</span>
+    <span class="vs">VS</span>
+    <span>1 Nolensville Home ($950K–$1.35M)</span>
   </div>
 </div>
 
@@ -501,24 +464,28 @@ body {
 <div class="stat-strip">
   <div class="stat-strip-inner">
     <div class="stat-item">
-      <div class="stat-label">Total Sales (2019–2026)</div>
-      <div class="stat-value">776</div>
-      <div class="stat-note">Closed transactions</div>
+      <div class="stat-label">Antioch Current Cash Flow</div>
+      <div class="stat-value">$2,800</div>
+      <div class="stat-change down">↓ Under-rented by ~$1,800/mo</div>
+      <div class="stat-note">Market rate: ~$4,600/mo combined</div>
     </div>
     <div class="stat-item">
-      <div class="stat-label">Median Price Growth</div>
-      <div class="stat-value">+127%</div>
-      <div class="stat-change">↑ $760K → $1.72M (2026 YTD)</div>
+      <div class="stat-label">Nolensville Rental Income</div>
+      <div class="stat-value">$3,200</div>
+      <div class="stat-change up">↑ +$400/mo vs. Antioch today</div>
+      <div class="stat-note">Separate Nolensville property already owned</div>
     </div>
     <div class="stat-item">
-      <div class="stat-label">Price/SF Growth</div>
-      <div class="stat-value">+99%</div>
-      <div class="stat-change">↑ $189 → $375/sf (2026 YTD)</div>
+      <div class="stat-label">Jordan Zone Price Growth</div>
+      <div class="stat-value">+116%</div>
+      <div class="stat-change up">↑ $760K → $1.64M (2019–2025)</div>
+      <div class="stat-note">Scales Farmstead median appreciation</div>
     </div>
     <div class="stat-item">
-      <div class="stat-label">2025 Median Price</div>
-      <div class="stat-value">$1.64M</div>
-      <div class="stat-note">101 closed sales</div>
+      <div class="stat-label">Equity Available to Deploy</div>
+      <div class="stat-value">~$900K</div>
+      <div class="stat-change up">Free &amp; clear · No mortgages</div>
+      <div class="stat-note">Cash purchase of Nolensville home</div>
     </div>
   </div>
 </div>
@@ -526,321 +493,248 @@ body {
 <!-- CONTEXT BANNER -->
 <div class="context-banner">
   <div class="context-inner">
-    <strong>A note on averages vs. medians in this report:</strong> The Jordan Elementary zone includes everything from $400K townhomes to $6M+ Rosebrooke estates. This wide price spread means the <strong>average sale price is consistently pulled upward</strong> by a small number of ultra-luxury transactions — particularly after 2022 when Rosebrooke began delivering. The <strong>median price is the more useful benchmark</strong> for understanding what the typical home in this zone is worth. Both are shown throughout so you can see how wide the spread is in any given year.
+    <strong>How to read this report:</strong> This analysis compares two paths for the same ~$900K in equity. <strong>Path A</strong> keeps the 3 Antioch rentals as-is (or renovated), collecting rent and hoping for appreciation. <strong>Path B</strong> sells those properties, deploys the equity into a cash purchase in the Jordan Elementary zone (Scales Farmstead or Taramore), and simultaneously generates $3,200/mo from the separate Nolensville rental already owned. All projections use <strong>2% annual appreciation for Antioch</strong> and <strong>5% for the Jordan zone</strong> — consistent with historical trends in both markets. This is not financial advice; it is a data-informed framework to support your decision.
   </div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
+  <!-- PATH COMPARISON CARD -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">The Two Paths, Side by Side</div>
+        <div class="card-subtitle">Financial snapshot · Same ~$900K equity base · Today's numbers</div>
+      </div>
+    </div>
+    <div class="path-grid">
+      <div class="path-card antioch">
+        <div class="path-label">🏚 Path A — Keep Antioch</div>
+        <div class="path-title">3 Antioch Rentals<br><small style="font-family:'DM Sans';font-size:13px;font-weight:400;color:var(--muted);">As-is or renovated</small></div>
+        <div class="path-row"><span class="pr-label">Combined property value</span><span class="pr-val">~$900,000</span></div>
+        <div class="path-row"><span class="pr-label">Current monthly rent</span><span class="pr-val bad">$2,800/mo</span></div>
+        <div class="path-row"><span class="pr-label">Market rent (after $65K reno)</span><span class="pr-val">~$4,600/mo</span></div>
+        <div class="path-row"><span class="pr-label">Renovation cost to get there</span><span class="pr-val bad">$60K–$75K out of pocket</span></div>
+        <div class="path-row"><span class="pr-label">Number of roofs</span><span class="pr-val bad">3</span></div>
+        <div class="path-row"><span class="pr-label">Number of HVAC systems</span><span class="pr-val bad">3</span></div>
+        <div class="path-row"><span class="pr-label">Number of kitchens</span><span class="pr-val bad">3</span></div>
+        <div class="path-row"><span class="pr-label">Number of bathrooms</span><span class="pr-val bad">5</span></div>
+        <div class="path-row"><span class="pr-label">Number of tenants to manage</span><span class="pr-val bad">3</span></div>
+        <div class="path-row"><span class="pr-label">Market / school zone</span><span class="pr-val bad">Antioch / Davidson Co.</span></div>
+        <div class="path-row"><span class="pr-label">Projected 5-yr appreciation (2%)</span><span class="pr-val">~$994K total value</span></div>
+        <div class="path-row"><span class="pr-label">5-yr equity gain</span><span class="pr-val bad">+$94K</span></div>
+      </div>
+      <div class="path-card nolensville">
+        <div class="path-label">🏡 Path B — Buy Nolensville</div>
+        <div class="path-title">1 Scales / Taramore Home<br><small style="font-family:'DM Sans';font-size:13px;font-weight:400;color:var(--muted);">Cash purchase, no mortgage</small></div>
+        <div class="path-row"><span class="pr-label">Purchase price (target range)</span><span class="pr-val">$950K–$1.35M</span></div>
+        <div class="path-row"><span class="pr-label">Monthly housing payment</span><span class="pr-val good">$0 (cash purchase)</span></div>
+        <div class="path-row"><span class="pr-label">Rental income from Nolensville property</span><span class="pr-val good">$3,200/mo</span></div>
+        <div class="path-row"><span class="pr-label">Renovation cost</span><span class="pr-val good">$0</span></div>
+        <div class="path-row"><span class="pr-label">Number of roofs</span><span class="pr-val good">1</span></div>
+        <div class="path-row"><span class="pr-label">Number of HVAC systems</span><span class="pr-val good">1</span></div>
+        <div class="path-row"><span class="pr-label">Number of kitchens</span><span class="pr-val good">1</span></div>
+        <div class="path-row"><span class="pr-label">Number of bathrooms</span><span class="pr-val good">3</span></div>
+        <div class="path-row"><span class="pr-label">Number of tenants to manage</span><span class="pr-val good">1</span></div>
+        <div class="path-row"><span class="pr-label">Market / school zone</span><span class="pr-val good">Jordan Elementary / Williamson Co.</span></div>
+        <div class="path-row"><span class="pr-label">Projected 5-yr appreciation (5%)</span><span class="pr-val">~$1.21M–$1.72M value</span></div>
+        <div class="path-row"><span class="pr-label">5-yr equity gain</span><span class="pr-val good">+$260K–$370K</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- CHART CARD -->
   <div class="card">
     <div class="card-header">
       <div>
-        <div class="card-title">Zone-Wide Price Trends</div>
-        <div class="card-subtitle">All residential sales zoned for Jordan Elementary · 2019–2026 YTD</div>
+        <div class="card-title">5-Year Value Trajectory</div>
+        <div class="card-subtitle">Projected equity growth · 2% Antioch appreciation vs. 5% Jordan zone appreciation</div>
       </div>
     </div>
     <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchChart('price', event)">Avg vs. Median Price</button>
-      <button class="tab-btn" onclick="switchChart('ppsf', event)">Price Per Sq Ft</button>
-      <button class="tab-btn" onclick="switchChart('dom', event)">Days on Market</button>
-      <button class="tab-btn" onclick="switchChart('volume', event)">Sales Volume</button>
+      <button class="tab-btn active" onclick="switchChart('value', event)">Property Value Growth</button>
+      <button class="tab-btn" onclick="switchChart('cashflow', event)">Annual Cash Flow</button>
+      <button class="tab-btn" onclick="switchChart('jordan', event)">Jordan Zone History</button>
     </div>
     <div class="chart-wrap">
       <canvas id="mainChart" height="320"></canvas>
     </div>
   </div>
 
-  <!-- NEIGHBORHOOD COMPARISON (2025 data) -->
+  <!-- MAINTENANCE BURDEN CARD -->
   <div class="card">
     <div class="card-header">
       <div>
-        <div class="card-title">How the Key Neighborhoods Compare</div>
-        <div class="card-subtitle">2025 full-year medians · Jordan Elementary zone</div>
+        <div class="card-title">Maintenance Burden Comparison</div>
+        <div class="card-subtitle">The hidden cost of managing multiple properties</div>
       </div>
     </div>
-    <div class="compare-grid">
-      <div class="compare-card">
-        <div class="compare-name">🏫 Full Zone (All Neighborhoods)</div>
-        <div class="compare-stat">
-          <div class="cs-label">2025 Median Sale Price</div>
-          <div class="cs-val">$1,640,000</div>
-          <div class="cs-sub">101 sales · Avg DOM: 32 days</div>
+    <div class="maint-grid">
+      <div class="maint-col antioch-m">
+        <div class="maint-title">🏚 Path A — 3 Antioch Properties</div>
+        <div class="maint-item">
+          <span class="maint-icon">🏠</span>
+          <span class="maint-count">3</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Roofs</div>
+            <div class="maint-desc">3 separate aging structures to maintain, inspect &amp; replace</div>
+          </div>
         </div>
-        <div class="compare-stat">
-          <div class="cs-label">Median Price / SF</div>
-          <div class="cs-val">$347/sf</div>
+        <div class="maint-item">
+          <span class="maint-icon">❄️</span>
+          <span class="maint-count">3</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">HVAC Systems</div>
+            <div class="maint-desc">3 units to service annually, 3 potential failure points</div>
+          </div>
         </div>
-        <div class="compare-stat">
-          <div class="cs-label">Price Growth Since 2019</div>
-          <div class="cs-val" style="font-size:16px;color:#16a34a;">+116%</div>
-          <div class="cs-sub">$760K median → $1.64M</div>
+        <div class="maint-item">
+          <span class="maint-icon">🍳</span>
+          <span class="maint-count">3</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Kitchens</div>
+            <div class="maint-desc">3 sets of appliances, plumbing, and cabinets</div>
+          </div>
         </div>
+        <div class="maint-item">
+          <span class="maint-icon">🚿</span>
+          <span class="maint-count">5</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Bathrooms</div>
+            <div class="maint-desc">5 sets of plumbing, tile, fixtures &amp; water heaters</div>
+          </div>
+        </div>
+        <div class="maint-item">
+          <span class="maint-icon">👤</span>
+          <span class="maint-count">3</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Tenant Relationships</div>
+            <div class="maint-desc">3 leases, 3 move-in/outs, 3 sets of calls</div>
+          </div>
+        </div>
+        <div class="maint-total">14 total major maintenance items &amp; systems</div>
       </div>
-      <div class="compare-card highlight">
-        <div class="compare-name">📍 Scales Farmstead (Nolensville)</div>
-        <div class="compare-stat">
-          <div class="cs-label">2025 Median Sale Price</div>
-          <div class="cs-val">$995,000</div>
-          <div class="cs-sub">15 sales · Avg DOM: 36 days</div>
+      <div class="maint-col nolen-m">
+        <div class="maint-title">🏡 Path B — 1 Nolensville Home</div>
+        <div class="maint-item">
+          <span class="maint-icon">🏠</span>
+          <span class="maint-count">1</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Roof</div>
+            <div class="maint-desc">1 newer construction roof — lower short-term risk</div>
+          </div>
         </div>
-        <div class="compare-stat">
-          <div class="cs-label">Median Price / SF</div>
-          <div class="cs-val">$297/sf</div>
+        <div class="maint-item">
+          <span class="maint-icon">❄️</span>
+          <span class="maint-count">1</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">HVAC System</div>
+            <div class="maint-desc">1 system to service, 1 potential failure point</div>
+          </div>
         </div>
-        <div class="compare-stat">
-          <div class="cs-label">Price Growth Since 2019</div>
-          <div class="cs-val" style="font-size:16px;color:#16a34a;">+66%</div>
-          <div class="cs-sub">$600K median → $995K</div>
+        <div class="maint-item">
+          <span class="maint-icon">🍳</span>
+          <span class="maint-count">1</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Kitchen</div>
+            <div class="maint-desc">1 set of appliances, plumbing &amp; cabinets</div>
+          </div>
         </div>
+        <div class="maint-item">
+          <span class="maint-icon">🚿</span>
+          <span class="maint-count">3</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Bathrooms</div>
+            <div class="maint-desc">3 bathrooms — standard for a home this price range</div>
+          </div>
+        </div>
+        <div class="maint-item">
+          <span class="maint-icon">👤</span>
+          <span class="maint-count">1</span>
+          <div>
+            <div style="font-weight:600;font-size:13px;">Tenant Relationship</div>
+            <div class="maint-desc">You live here — 0 tenants to manage at this property</div>
+          </div>
+        </div>
+        <div class="maint-total">6 total major maintenance items &amp; systems</div>
       </div>
-      <div class="compare-card highlight">
-        <div class="compare-name">📍 Taramore (Brentwood)</div>
-        <div class="compare-stat">
-          <div class="cs-label">2025 Median Sale Price</div>
-          <div class="cs-val">$1,720,000</div>
-          <div class="cs-sub">17 sales · Avg DOM: 22 days</div>
-        </div>
-        <div class="compare-stat">
-          <div class="cs-label">Median Price / SF</div>
-          <div class="cs-val">$323/sf</div>
-        </div>
-        <div class="compare-stat">
-          <div class="cs-label">Price Growth Since 2019</div>
-          <div class="cs-val" style="font-size:16px;color:#16a34a;">+102%</div>
-          <div class="cs-sub">$852K median → $1.72M</div>
-        </div>
+    </div>
+    <div class="maint-note">
+      Note: Properties purchased pre-2010 in Antioch carry elevated deferred maintenance risk. Roofs, HVACs, and plumbing systems on 15+ year-old properties represent a compounding liability — particularly before any renovation that would bring them to market rent. The $60K–$75K renovation budget may not fully account for these systems.
+    </div>
+  </div>
+
+  <!-- JORDAN ZONE INSIGHT CARD -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Why the Jordan Zone Is Different</div>
+        <div class="card-subtitle">Market resilience data · 2019–2026 · All neighborhoods zoned for Jordan Elementary</div>
+      </div>
+    </div>
+    <div class="zone-context">
+      <strong>A market that held its value when rate shock hit everywhere else.</strong> In 2022, when mortgage rates spiked from 3% to 7%+ and transaction volume across Middle Tennessee fell significantly, the Jordan Elementary zone saw volume drop 46% — but median prices <em>kept climbing</em> from $967K to $1.46M. In 2023, with only 75 closings (the lowest on record), the median still held near $1.49M. This is not typical behavior for a rental market. It is the behavior of a location-driven, school-driven, scarcity-driven market. Antioch does not have this insulation.
+    </div>
+    <div class="insight-grid">
+      <div class="insight-box blue">
+        <div class="insight-icon">📈</div>
+        <div class="insight-title">Median Price Up 116% Since 2019</div>
+        <div class="insight-body">Scales Farmstead went from a $600K median to $995K. Taramore went from $852K to $1.72M. Both meaningfully outpaced Davidson County appreciation over the same period.</div>
+      </div>
+      <div class="insight-box green">
+        <div class="insight-icon">🛡️</div>
+        <div class="insight-title">Rate Shock Didn't Break Prices</div>
+        <div class="insight-body">2022–2023 saw the highest rate environment in 20 years. Volume dropped zone-wide, but prices held. Sellers who waited got their number. That's a quality-of-location story, not a market story.</div>
+      </div>
+      <div class="insight-box gold">
+        <div class="insight-icon">🏫</div>
+        <div class="insight-title">School Zone = Demand Floor</div>
+        <div class="insight-body">Jordan Elementary is one of the most sought-after school assignments in Williamson County. Families relocating to Nashville specifically target this zone — providing a perpetual demand floor that Antioch cannot replicate.</div>
       </div>
     </div>
   </div>
 
-  <!-- YEAR-BY-YEAR -->
-  <div class="slider-section">
-    <div class="slider-header">
-      <h2>Year-by-Year Breakdown</h2>
-      <p>Zone-wide figures across all neighborhoods · Select a year for full stats and report access</p>
-    </div>
-
-    <div class="year-tabs">
-      <button class="year-tab active" onclick="showYear('2019', event)">2019</button>
-      <button class="year-tab" onclick="showYear('2020', event)">2020</button>
-      <button class="year-tab" onclick="showYear('2021', event)">2021</button>
-      <button class="year-tab" onclick="showYear('2022', event)">2022</button>
-      <button class="year-tab" onclick="showYear('2023', event)">2023</button>
-      <button class="year-tab" onclick="showYear('2024', event)">2024</button>
-      <button class="year-tab" onclick="showYear('2025', event)">2025</button>
-      <button class="year-tab" onclick="showYear('2026', event)">2026 <span class="badge">YTD</span></button>
-    </div>
-
-    <!-- 2019 -->
-    <div class="year-panel active" id="panel-2019">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">107</div><div class="ys-sub">Closed transactions</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$800K</div><div class="ys-sub">$799,985</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$760K</div><div class="ys-sub">$759,648</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$192</div><div class="ys-sub">Median: $189/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">36</div><div class="ys-sub">Median: 14 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$407K–$1.37M</div><div class="ys-sub">Low to high</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="year-context">
-            <strong>2019 — A Balanced, Diverse Market.</strong> With 107 closings across the zone, 2019 showed healthy demand at every price level. The tight spread between average ($800K) and median ($760K) reflects a well-distributed market without major outliers — Rosebrooke didn't yet exist. Scales Farmstead was actively building out at $400–650K while Taramore was already commanding $850K+. The zone was gaining recognition as Williamson County's prime school-district address.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frf8Am" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2019 Zone Report on Realtracs
-          </a>
-        </div>
+  <!-- SCALES vs TARAMORE COMPARISON -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Scales Farmstead vs. Taramore — Which Fits His Budget?</div>
+        <div class="card-subtitle">2025 full-year data · Jordan Elementary zone · $950K–$1.35M target range</div>
       </div>
     </div>
-
-    <!-- 2020 -->
-    <div class="year-panel" id="panel-2020">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">140</div><div class="ys-sub">Closed transactions</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$813K</div><div class="ys-sub">$812,516</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$733K</div><div class="ys-sub">$733,332</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$203</div><div class="ys-sub">Median: $195/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">29</div><div class="ys-sub">Median: 9 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$408K–$2.40M</div><div class="ys-sub">Low to high</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="year-context">
-            <strong>2020 — Volume Surge, Values Hold.</strong> Sales volume jumped 31% to 140 closings — the second-highest year on record — as pandemic-era relocation brought waves of buyers from higher-cost cities. Despite the increase in volume, the median price dipped slightly from 2019, reflecting a mix effect: Scales Farmstead contributed heavy volume at the $450–650K range. The 9-day median DOM tells the real story — buyers were moving fast.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frfJ18" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2020 Zone Report on Realtracs
-          </a>
-        </div>
+    <div class="path-grid">
+      <div class="path-card" style="background:var(--blue-light);border-color:#bfdbfe;">
+        <div class="path-label" style="color:var(--blue);">📍 Scales Farmstead (Nolensville)</div>
+        <div class="path-title">Best fit for the $950K–$1.1M range</div>
+        <div class="path-row"><span class="pr-label">2025 Median Sale Price</span><span class="pr-val">$995,000</span></div>
+        <div class="path-row"><span class="pr-label">Median Price / SF</span><span class="pr-val">$297/sf</span></div>
+        <div class="path-row"><span class="pr-label">2025 Sales Volume</span><span class="pr-val">15 sales</span></div>
+        <div class="path-row"><span class="pr-label">Avg Days on Market (2025)</span><span class="pr-val">36 days</span></div>
+        <div class="path-row"><span class="pr-label">Price Growth Since 2019</span><span class="pr-val good">+66%</span></div>
+        <div class="path-row"><span class="pr-label">5-yr projected value (at 5%)</span><span class="pr-val good">~$1.27M</span></div>
+        <div class="path-row"><span class="pr-label">Cash flow advantage vs. Antioch</span><span class="pr-val good">+$400/mo from Nolen rental</span></div>
+        <div class="path-row"><span class="pr-label">Budget fit</span><span class="pr-val good">✓ Within $950K–$1.1M range</span></div>
+      </div>
+      <div class="path-card" style="background:var(--blue-light);border-color:#bfdbfe;">
+        <div class="path-label" style="color:var(--blue);">📍 Taramore (Brentwood)</div>
+        <div class="path-title">Strong option at the $1.2M–$1.35M ceiling</div>
+        <div class="path-row"><span class="pr-label">2025 Median Sale Price</span><span class="pr-val">$1,720,000</span></div>
+        <div class="path-row"><span class="pr-label">Median Price / SF</span><span class="pr-val">$323/sf</span></div>
+        <div class="path-row"><span class="pr-label">2025 Sales Volume</span><span class="pr-val">17 sales</span></div>
+        <div class="path-row"><span class="pr-label">Avg Days on Market (2025)</span><span class="pr-val">22 days</span></div>
+        <div class="path-row"><span class="pr-label">Price Growth Since 2019</span><span class="pr-val good">+102%</span></div>
+        <div class="path-row"><span class="pr-label">Entry-level in Taramore</span><span class="pr-val">~$1.1M–$1.35M possible</span></div>
+        <div class="path-row"><span class="pr-label">Cash flow advantage vs. Antioch</span><span class="pr-val good">+$400/mo from Nolen rental</span></div>
+        <div class="path-row"><span class="pr-label">Budget fit</span><span class="pr-val" style="color:#d97706;">△ Stretches the upper range</span></div>
       </div>
     </div>
-
-    <!-- 2021 -->
-    <div class="year-panel" id="panel-2021">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">160</div><div class="ys-sub">Highest year on record</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.12M</div><div class="ys-sub">$1,116,892</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$967K</div><div class="ys-sub">$966,965</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$259</div><div class="ys-sub">Median: $238/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">22</div><div class="ys-sub">Median: 2 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$526K–$9.90M</div><div class="ys-sub">Whistler Farms outlier</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="avg-note">ℹ A $9.9M sale at Whistler Farms in December 2021 pulls the average significantly upward. The median ($967K) is the more representative figure for this year.</div>
-          <div class="year-context">
-            <strong>2021 — The Biggest Year Ever.</strong> 160 closings, a median DOM of 2 days, and average prices up 37% year-over-year. Every price segment of this zone experienced simultaneous appreciation. Rosebrooke broke ground, Tuscany Hills and Morgan Farms saw bidding wars, and Taramore crossed $1M+ across all product types. This was the year the Jordan zone permanently established itself as one of the most in-demand corridors in Middle Tennessee.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frfTAG" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2021 Zone Report on Realtracs
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2022 -->
-    <div class="year-panel" id="panel-2022">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">87</div><div class="ys-sub">Closed transactions</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.56M</div><div class="ys-sub">$1,562,163</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.46M</div><div class="ys-sub">$1,457,250</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$341</div><div class="ys-sub">Median: $325/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">12</div><div class="ys-sub">Median: 3 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$688K–$6.00M</div><div class="ys-sub">Low to high</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="year-context">
-            <strong>2022 — Rate Shock Slashed Volume, Not Prices.</strong> Transactions fell 46% as mortgage rates spiked from 3% to 7%+, but prices continued climbing — the median hit $1.46M. This is the clearest evidence of how resilient this zone is: even when buyers retreat, the sellers who do transact hold their value. A median DOM of 3 days shows urgency from qualified buyers never really disappeared. Allens Green delivered its first batch of $1.5–2M+ homes this year.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frfaET" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2022 Zone Report on Realtracs
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2023 -->
-    <div class="year-panel" id="panel-2023">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">75</div><div class="ys-sub">Closed transactions</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.72M</div><div class="ys-sub">$1,720,848</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.49M</div><div class="ys-sub">$1,487,000</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$355</div><div class="ys-sub">Median: $329/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">43</div><div class="ys-sub">Median: 15 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$695K–$7.20M</div><div class="ys-sub">Low to high</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="avg-note">ℹ Rosebrooke deliveries ($4–7M range) are widening the avg vs. median gap. The $233K spread between average and median is now structural — not distortion.</div>
-          <div class="year-context">
-            <strong>2023 — The Low-Volume Year That Held Its Ground.</strong> Only 75 closings — the lowest since before 2019 — as the rate environment suppressed inventory and sidelined move-up buyers. Despite this, median prices held near $1.49M and average DOM stayed reasonable at 15 days median. Rosebrooke's luxury deliveries began skewing average figures upward. The schools, the amenities, and the location meant that motivated sellers in this zone still found motivated buyers.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frfeEG" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2023 Zone Report on Realtracs
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2024 -->
-    <div class="year-panel" id="panel-2024">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">84</div><div class="ys-sub">Closed transactions</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.87M</div><div class="ys-sub">$1,867,224</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.52M</div><div class="ys-sub">$1,520,000</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$383</div><div class="ys-sub">Median: $335/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">52</div><div class="ys-sub">Median: 14 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$790K–$4.36M</div><div class="ys-sub">Low to high</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="year-context">
-            <strong>2024 — Stability at Scale.</strong> Volume recovered slightly to 84 transactions and prices held firm. The median $1.52M and a 14-day median DOM are strong indicators of underlying demand — even with average DOM of 52 days, which reflects a small number of overpriced listings dragging the average up. Rosebrooke's $2.5–4.4M deliveries are now consistently present in the dataset. The zone's price floor has clearly been reset: under $800K is essentially gone for detached single-family homes.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frfk08" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2024 Zone Report on Realtracs
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2025 -->
-    <div class="year-panel" id="panel-2025">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">101</div><div class="ys-sub">Closed transactions</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$2.03M</div><div class="ys-sub">$2,028,142</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.64M</div><div class="ys-sub">$1,640,000</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$399</div><div class="ys-sub">Median: $347/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">32</div><div class="ys-sub">Median: 17 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$350K–$6.27M</div><div class="ys-sub">Low to high</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="year-context">
-            <strong>2025 — Volume Returns, Zone Crosses $2M Average.</strong> With 101 closings — the best volume since 2021 — and the average price crossing $2M for the first time, 2025 marked a clear maturation of this zone. The median DOM improving to 17 days while volume climbed is a healthy sign: supply and demand are coming back into balance. Rosebrooke, Arcadia, and new Calistoga deliveries added significant high-end transactions. For the typical buyer looking at the $1–1.8M range, this zone continues to deliver.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frft0I" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2025 Zone Report on Realtracs
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2026 -->
-    <div class="year-panel" id="panel-2026">
-      <div class="year-panel-grid">
-        <div>
-          <div class="year-stats">
-            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">22</div><div class="ys-sub">YTD through Mar 2026</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$2.06M</div><div class="ys-sub">$2,057,268</div></div>
-            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.72M</div><div class="ys-sub">$1,722,000</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$423</div><div class="ys-sub">Median: $375/sf</div></div>
-            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">44</div><div class="ys-sub">Median: 52 days</div></div>
-            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$779K–$5.30M</div><div class="ys-sub">22 sales YTD</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="year-context">
-            <strong>2026 YTD — Early but Meaningful.</strong> With 22 closings through mid-March, 2026 has more usable data than any individual neighborhood this year — putting it on pace for roughly 100 closings full-year if demand holds. The median of $1.72M is already ahead of 2025's full-year median, and the $375/sf median is a zone record. The higher median DOM (52 days) in this sample reflects a mix of slower-moving luxury listings rather than softening demand across the board. A strong opening to the year.
-          </div>
-          <a class="view-report-btn" href="https://go.realtracs.com/1frfxDu" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
-            View Full 2026 YTD Zone Report on Realtracs
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /slider-section -->
+  </div>
 
   <!-- CTA -->
   <div class="cta-card">
-    <h2>Shopping the<br><em>Jordan Elementary Zone?</em></h2>
-    <p>Whether you're looking at Scales Farmstead, Taramore, or any of the other neighborhoods in this corridor — the right home and the right price point require local expertise. Let's talk through your options.</p>
+    <h2>Ready to Run the<br><em>Full Numbers Together?</em></h2>
+    <p>This report gives you the framework — but the right move depends on your specific tax situation, timeline, and what's available in the market right now. Let's walk through it together.</p>
     <a class="cta-btn" href="https://the-jason-kaczmarski-team-springfield-tn.remax.com/ask/9539cc58d5c28bd9c77d6755120798e0">
       Talk to Jason →
     </a>
@@ -854,116 +748,153 @@ body {
   Jason Kaczmarski &nbsp;•&nbsp; RE/MAX 1st Choice &nbsp;•&nbsp;
   <a href="tel:6153847355">615-384-7355</a>
   <div class="disclaimer">
-    Data sourced from Realtracs MLS. Information believed to be accurate but not guaranteed. © 2026 Realtracs, Inc.
-    All figures represent closed residential sales zoned for Jordan Elementary School, Williamson County, TN.
-    Report prepared by Jason Kaczmarski, RE/MAX 1st Choice.
+    Data sourced from Realtracs MLS and public records. All projections are estimates based on historical market trends and are not guaranteed. Appreciation rates (2% Antioch / 5% Jordan zone) are illustrative assumptions for comparison purposes only. This report does not constitute financial, tax, or investment advice. © 2026 Realtracs, Inc. Report prepared by Jason Kaczmarski, RE/MAX 1st Choice.
   </div>
 </div>
 
 <script>
-const years    = ['2019','2020','2021','2022','2023','2024','2025','2026*'];
-const avgPrice = [799985, 812516, 1116892, 1562163, 1720848, 1867224, 2028142, 2057268];
-const medPrice = [759648, 733332,  966965, 1457250, 1487000, 1520000, 1640000, 1722000];
-const avgPPSF  = [191.60, 203.37, 258.95, 341.40, 355.43, 383.13, 399.08, 422.68];
-const medPPSF  = [188.59, 194.69, 238.15, 325.43, 329.16, 334.62, 347.15, 375.08];
-const avgDOM   = [36, 29, 22, 12, 43, 52, 32, 44];
-const salesVol = [107, 140, 160, 87, 75, 84, 101, 22];
+// Chart data
+const years5 = ['2026','2027','2028','2029','2030','2031'];
+
+// Antioch: $900K at 2% annually
+const antiochVals = [900000];
+for (let i = 1; i < 6; i++) antiochVals.push(Math.round(antiochVals[i-1] * 1.02));
+
+// Scales: $995K at 5% annually (median buy-in)
+const scalesVals = [995000];
+for (let i = 1; i < 6; i++) scalesVals.push(Math.round(scalesVals[i-1] * 1.05));
+
+// Taramore entry: $1.2M at 5%
+const taramoreVals = [1200000];
+for (let i = 1; i < 6; i++) taramoreVals.push(Math.round(taramoreVals[i-1] * 1.05));
+
+// Cash flow: annual
+// Path A (Antioch): $2,800/mo today = $33,600/yr, growing 1%/yr
+// Estimate ~$5K/yr maintenance per property = $15K, capex reserves ~$8K
+// Net ~$10,600/yr as-is
+const antiochCF = [10600, 10706, 10813, 10921, 11030, 11141];
+
+// Path B (Nolensville): $3,200/mo from separate rental = $38,400/yr
+// No mortgage, maintenance ~$4K/yr on single newer home
+// Net ~$34,400/yr
+const nolenCF = [34400, 34744, 35091, 35442, 35797, 36155];
+
+// Jordan zone history
+const jordanYears = ['2019','2020','2021','2022','2023','2024','2025','2026*'];
+const jordanMed   = [759648, 733332, 966965, 1457250, 1487000, 1520000, 1640000, 1722000];
+const jordanAvg   = [799985, 812516, 1116892, 1562163, 1720848, 1867224, 2028142, 2057268];
+
+const fmt = v => '$'+(v>=1000000?(v/1000000).toFixed(2)+'M':(v/1000).toFixed(0)+'K');
+const fmtFull = v => '$'+Math.round(v).toLocaleString();
 
 const chartConfigs = {
-  price: {
-    datasets: [
-      {
-        label: 'Avg Sale Price',
-        data: avgPrice,
-        borderColor: '#1f4fa3',
-        backgroundColor: 'rgba(31,79,163,0.08)',
-        borderWidth: 2.5,
-        pointBackgroundColor: years.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
-        pointRadius: years.map((_,i) => i===7 ? 7 : 5),
-        pointHoverRadius: 8,
-        fill: true,
-        tension: 0.35
-      },
-      {
-        label: 'Median Sale Price',
-        data: medPrice,
-        borderColor: '#f0b429',
-        backgroundColor: 'rgba(240,180,41,0.06)',
-        borderWidth: 2.5,
-        pointBackgroundColor: '#f0b429',
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        fill: false,
-        tension: 0.35,
-        borderDash: [6,3]
-      }
-    ],
-    yFormat: v => '$'+(v>=1000000?(v/1000000).toFixed(2)+'M':(v/1000).toFixed(0)+'K'),
-    tooltipFormat: v => '$'+Math.round(v).toLocaleString()
+  value: {
+    type: 'line',
+    data: {
+      labels: years5,
+      datasets: [
+        {
+          label: '3 Antioch Properties (2% appreciation)',
+          data: antiochVals,
+          borderColor: '#ea580c',
+          backgroundColor: 'rgba(234,88,12,0.08)',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#ea580c',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          fill: true,
+          tension: 0.35,
+          borderDash: [6,3]
+        },
+        {
+          label: 'Scales Farmstead Purchase (5% appreciation)',
+          data: scalesVals,
+          borderColor: '#16a34a',
+          backgroundColor: 'rgba(22,163,74,0.07)',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#16a34a',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          fill: true,
+          tension: 0.35
+        },
+        {
+          label: 'Taramore Entry Purchase (5% appreciation)',
+          data: taramoreVals,
+          borderColor: '#1f4fa3',
+          backgroundColor: 'rgba(31,79,163,0.06)',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#1f4fa3',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          fill: false,
+          tension: 0.35
+        }
+      ]
+    },
+    yFormat: v => fmt(v),
+    tooltipFormat: v => fmtFull(v)
   },
-  ppsf: {
-    datasets: [
-      {
-        label: 'Avg $/SF',
-        data: avgPPSF,
-        borderColor: '#1f4fa3',
-        backgroundColor: 'rgba(31,79,163,0.08)',
-        borderWidth: 2.5,
-        pointBackgroundColor: years.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
-        pointRadius: years.map((_,i) => i===7 ? 7 : 5),
-        pointHoverRadius: 8,
-        fill: true,
-        tension: 0.35
-      },
-      {
-        label: 'Median $/SF',
-        data: medPPSF,
-        borderColor: '#f0b429',
-        backgroundColor: 'transparent',
-        borderWidth: 2.5,
-        pointBackgroundColor: '#f0b429',
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        fill: false,
-        tension: 0.35,
-        borderDash: [6,3]
-      }
-    ],
-    yFormat: v => '$'+v.toFixed(0),
-    tooltipFormat: v => '$'+v.toFixed(2)+'/sf'
+  cashflow: {
+    type: 'bar',
+    data: {
+      labels: years5,
+      datasets: [
+        {
+          label: 'Path A — Antioch Net Annual Cash Flow',
+          data: antiochCF,
+          backgroundColor: 'rgba(234,88,12,0.7)',
+          borderColor: '#ea580c',
+          borderWidth: 2,
+          borderRadius: 6
+        },
+        {
+          label: 'Path B — Nolensville Rental Net Annual Cash Flow',
+          data: nolenCF,
+          backgroundColor: 'rgba(22,163,74,0.7)',
+          borderColor: '#16a34a',
+          borderWidth: 2,
+          borderRadius: 6
+        }
+      ]
+    },
+    yFormat: v => '$'+(v/1000).toFixed(0)+'K',
+    tooltipFormat: v => '$'+Math.round(v).toLocaleString()+'/yr'
   },
-  dom: {
-    datasets: [
-      {
-        label: 'Avg Days on Market',
-        data: avgDOM,
-        borderColor: '#d81f26',
-        backgroundColor: 'rgba(216,31,38,0.08)',
-        borderWidth: 2.5,
-        pointBackgroundColor: years.map((_,i) => i===7 ? '#f0b429' : '#d81f26'),
-        pointRadius: years.map((_,i) => i===7 ? 7 : 5),
-        pointHoverRadius: 8,
-        fill: true,
-        tension: 0.35
-      }
-    ],
-    yFormat: v => v+' days',
-    tooltipFormat: v => v+' days avg'
-  },
-  volume: {
-    datasets: [
-      {
-        label: 'Closed Sales',
-        data: salesVol,
-        backgroundColor: years.map((_,i) => i===7 ? 'rgba(240,180,41,0.5)' : 'rgba(31,79,163,0.75)'),
-        borderColor: years.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
-        borderWidth: 2,
-        borderRadius: 6,
-        type: 'bar'
-      }
-    ],
-    yFormat: v => v,
-    tooltipFormat: v => v+' sales'
+  jordan: {
+    type: 'line',
+    data: {
+      labels: jordanYears,
+      datasets: [
+        {
+          label: 'Avg Sale Price — Jordan Zone',
+          data: jordanAvg,
+          borderColor: '#1f4fa3',
+          backgroundColor: 'rgba(31,79,163,0.08)',
+          borderWidth: 2.5,
+          pointBackgroundColor: jordanYears.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
+          pointRadius: jordanYears.map((_,i) => i===7 ? 7 : 5),
+          pointHoverRadius: 8,
+          fill: true,
+          tension: 0.35
+        },
+        {
+          label: 'Median Sale Price — Jordan Zone',
+          data: jordanMed,
+          borderColor: '#f0b429',
+          backgroundColor: 'transparent',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#f0b429',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          fill: false,
+          tension: 0.35,
+          borderDash: [6,3]
+        }
+      ]
+    },
+    yFormat: v => fmt(v),
+    tooltipFormat: v => fmtFull(v)
   }
 };
 
@@ -974,8 +905,8 @@ function buildChart(type) {
   const cfg = chartConfigs[type];
   const ctx = document.getElementById('mainChart').getContext('2d');
   currentChart = new Chart(ctx, {
-    type: type==='volume' ? 'bar' : 'line',
-    data: { labels: years, datasets: cfg.datasets },
+    type: cfg.type,
+    data: cfg.data,
     options: {
       responsive: true,
       maintainAspectRatio: true,
@@ -991,8 +922,7 @@ function buildChart(type) {
           titleFont: { family: "'DM Sans',sans-serif", weight: '600' },
           bodyFont: { family: "'DM Sans',sans-serif" },
           callbacks: {
-            label: ctx => ' '+ctx.dataset.label+': '+cfg.tooltipFormat(ctx.parsed.y),
-            afterBody: items => items[0]?.label==='2026*' ? ['22 sales YTD — data will grow'] : []
+            label: ctx => ' '+ctx.dataset.label+': '+cfg.tooltipFormat(ctx.parsed.y)
           }
         }
       },
@@ -1010,14 +940,7 @@ function switchChart(type, e) {
   buildChart(type);
 }
 
-function showYear(year, e) {
-  document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('panel-'+year).classList.add('active');
-  e.currentTarget.classList.add('active');
-}
-
-window.addEventListener('load', () => buildChart('price'));
+window.addEventListener('load', () => buildChart('value'));
 </script>
 </body>
 </html>
