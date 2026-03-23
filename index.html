@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan Elementary Zone | Market Trends 2019–2026 | Jason Kaczmarski Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #d81f26;
+  --blue: #1f4fa3;
+  --blue-dark: #163d82;
+  --blue-mid: #2d57a5;
+  --blue-light: #eef3ff;
+  --gold: #f0b429;
+  --gold-light: #fef9ec;
+  --text: #1a1a2e;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --bg: #f7f8fc;
+  --white: #ffffff;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.header {
+  background: var(--red);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header img { max-width: 200px; }
+
+.hero {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: white;
+  padding: 52px 20px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .7;
+  margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 50px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  position: relative;
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 15px;
+  opacity: .8;
+  max-width: 560px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+  position: relative;
+}
+.hood-tags {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.hood-tag {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+/* STAT STRIP */
+.stat-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.stat-strip-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 22px 24px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-change { font-size: 12px; font-weight: 600; color: #16a34a; }
+.stat-note { font-size: 11px; color: var(--muted); }
+
+/* CONTEXT BANNER */
+.context-banner {
+  max-width: 1060px;
+  margin: 28px auto 0;
+  padding: 0 20px;
+}
+.context-inner {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 18px 24px;
+  border-left: 4px solid var(--blue);
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.context-inner strong { color: var(--text); }
+
+/* MAIN */
+.main {
+  max-width: 1060px;
+  margin: 24px auto 60px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* CARD */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 20px rgba(0,0,0,.07);
+  overflow: hidden;
+}
+.card-header {
+  padding: 22px 28px 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+.card-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.chart-wrap { padding: 20px 28px 24px; }
+
+/* TABS */
+.tab-bar {
+  display: flex;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.tab-btn:hover { color: var(--blue); }
+.tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* NEIGHBORHOOD COMPARE */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 24px 28px;
+}
+.compare-card {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+}
+.compare-card.highlight {
+  background: var(--blue-light);
+  border-color: var(--blue-mid);
+}
+.compare-name {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.compare-card.highlight .compare-name { color: var(--blue); }
+.compare-stat {
+  margin-bottom: 8px;
+}
+.compare-stat .cs-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.compare-stat .cs-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+.compare-stat .cs-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* YEAR SLIDER */
+.slider-section {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 20px rgba(0,0,0,.07);
+  overflow: hidden;
+}
+.slider-header {
+  padding: 22px 28px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.slider-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+.slider-header p { font-size: 13px; color: var(--muted); margin-top: 3px; }
+
+.year-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.year-tabs::-webkit-scrollbar { display: none; }
+.year-tab {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.year-tab:hover { color: var(--blue); background: var(--blue-light); }
+.year-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: var(--blue-light); }
+.year-tab .badge {
+  display: inline-block;
+  font-size: 9px;
+  background: var(--gold);
+  color: var(--text);
+  border-radius: 99px;
+  padding: 1px 5px;
+  margin-left: 4px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.year-panel {
+  display: none;
+  padding: 28px;
+  animation: fadeIn .25s ease;
+}
+.year-panel.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.year-panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.year-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.year-stat-box {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+}
+.year-stat-box .ys-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.year-stat-box .ys-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+}
+.year-stat-box .ys-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+.year-context {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding: 16px;
+  background: var(--gold-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 16px;
+}
+.year-context strong { color: var(--text); }
+
+.avg-note {
+  font-size: 12px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #1e40af;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.view-report-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--blue);
+  color: white;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.view-report-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.view-report-btn svg { width: 14px; height: 14px; }
+
+/* CTA */
+.cta-card {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-card::before {
+  content: '🏘';
+  position: absolute;
+  font-size: 180px;
+  opacity: .05;
+  right: -30px;
+  bottom: -40px;
+  pointer-events: none;
+}
+.cta-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.cta-card h2 em { font-style: italic; color: var(--gold); }
+.cta-card p {
+  font-size: 15px;
+  opacity: .85;
+  max-width: 500px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+.cta-btn {
+  display: inline-block;
+  background: white;
+  color: var(--blue);
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.cta-btn:hover { background: var(--gold); color: var(--text); transform: translateY(-2px); }
+.cta-sub { font-size: 12px; opacity: .6; margin-top: 12px; }
+
+/* FOOTER */
+.footer {
+  background: var(--blue);
+  color: white;
+  text-align: center;
+  padding: 18px 20px;
+  font-size: 13px;
+}
+.footer a { color: var(--gold); text-decoration: none; }
+.footer .disclaimer {
+  margin-top: 8px;
+  font-size: 10px;
+  opacity: .55;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+@media (max-width: 860px) {
+  .compare-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .stat-strip-inner { grid-template-columns: 1fr 1fr; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .year-panel-grid { grid-template-columns: 1fr; }
+  .cta-card { padding: 28px 20px; }
+  .chart-wrap { padding: 16px 12px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="https://kvcore-library.s3.amazonaws.com/remax1stchoice8207/images/03b9616f75a8e185d56a93c799829fdf.png" alt="RE/MAX 1st Choice – Jason Kaczmarski Team">
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Nolensville & Brentwood, TN &nbsp;·&nbsp; School Zone Market Report</div>
+  <h1>Jordan Elementary Zone<br><em>Market History</em></h1>
+  <p class="hero-sub">Eight years of closed sales data — 2019 through early 2026 — across every neighborhood zoned for one of Williamson County's most sought-after elementary schools.</p>
+  <div class="hood-tags">
+    <span class="hood-tag">Scales Farmstead</span>
+    <span class="hood-tag">Taramore</span>
+    <span class="hood-tag">Brooksbank Estates</span>
+    <span class="hood-tag">The Farm at Clovercroft</span>
+    <span class="hood-tag">Tuscany Hills</span>
+    <span class="hood-tag">Morgan Farms</span>
+    <span class="hood-tag">Sonoma</span>
+    <span class="hood-tag">Cromwell</span>
+    <span class="hood-tag">Rosebrooke</span>
+    <span class="hood-tag">+ more</span>
+  </div>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-strip-inner">
+    <div class="stat-item">
+      <div class="stat-label">Total Sales (2019–2026)</div>
+      <div class="stat-value">776</div>
+      <div class="stat-note">Closed transactions</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Median Price Growth</div>
+      <div class="stat-value">+127%</div>
+      <div class="stat-change">↑ $760K → $1.72M (2026 YTD)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Price/SF Growth</div>
+      <div class="stat-value">+99%</div>
+      <div class="stat-change">↑ $189 → $375/sf (2026 YTD)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">2025 Median Price</div>
+      <div class="stat-value">$1.64M</div>
+      <div class="stat-note">101 closed sales</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT BANNER -->
+<div class="context-banner">
+  <div class="context-inner">
+    <strong>A note on averages vs. medians in this report:</strong> The Jordan Elementary zone includes everything from $400K townhomes to $6M+ Rosebrooke estates. This wide price spread means the <strong>average sale price is consistently pulled upward</strong> by a small number of ultra-luxury transactions — particularly after 2022 when Rosebrooke began delivering. The <strong>median price is the more useful benchmark</strong> for understanding what the typical home in this zone is worth. Both are shown throughout so you can see how wide the spread is in any given year.
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- CHART CARD -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Zone-Wide Price Trends</div>
+        <div class="card-subtitle">All residential sales zoned for Jordan Elementary · 2019–2026 YTD</div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchChart('price', event)">Avg vs. Median Price</button>
+      <button class="tab-btn" onclick="switchChart('ppsf', event)">Price Per Sq Ft</button>
+      <button class="tab-btn" onclick="switchChart('dom', event)">Days on Market</button>
+      <button class="tab-btn" onclick="switchChart('volume', event)">Sales Volume</button>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="mainChart" height="320"></canvas>
+    </div>
+  </div>
+
+  <!-- NEIGHBORHOOD COMPARISON (2025 data) -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">How the Key Neighborhoods Compare</div>
+        <div class="card-subtitle">2025 full-year medians · Jordan Elementary zone</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="compare-name">🏫 Full Zone (All Neighborhoods)</div>
+        <div class="compare-stat">
+          <div class="cs-label">2025 Median Sale Price</div>
+          <div class="cs-val">$1,640,000</div>
+          <div class="cs-sub">101 sales · Avg DOM: 32 days</div>
+        </div>
+        <div class="compare-stat">
+          <div class="cs-label">Median Price / SF</div>
+          <div class="cs-val">$347/sf</div>
+        </div>
+        <div class="compare-stat">
+          <div class="cs-label">Price Growth Since 2019</div>
+          <div class="cs-val" style="font-size:16px;color:#16a34a;">+116%</div>
+          <div class="cs-sub">$760K median → $1.64M</div>
+        </div>
+      </div>
+      <div class="compare-card highlight">
+        <div class="compare-name">📍 Scales Farmstead (Nolensville)</div>
+        <div class="compare-stat">
+          <div class="cs-label">2025 Median Sale Price</div>
+          <div class="cs-val">$995,000</div>
+          <div class="cs-sub">15 sales · Avg DOM: 36 days</div>
+        </div>
+        <div class="compare-stat">
+          <div class="cs-label">Median Price / SF</div>
+          <div class="cs-val">$297/sf</div>
+        </div>
+        <div class="compare-stat">
+          <div class="cs-label">Price Growth Since 2019</div>
+          <div class="cs-val" style="font-size:16px;color:#16a34a;">+66%</div>
+          <div class="cs-sub">$600K median → $995K</div>
+        </div>
+      </div>
+      <div class="compare-card highlight">
+        <div class="compare-name">📍 Taramore (Brentwood)</div>
+        <div class="compare-stat">
+          <div class="cs-label">2025 Median Sale Price</div>
+          <div class="cs-val">$1,720,000</div>
+          <div class="cs-sub">17 sales · Avg DOM: 22 days</div>
+        </div>
+        <div class="compare-stat">
+          <div class="cs-label">Median Price / SF</div>
+          <div class="cs-val">$323/sf</div>
+        </div>
+        <div class="compare-stat">
+          <div class="cs-label">Price Growth Since 2019</div>
+          <div class="cs-val" style="font-size:16px;color:#16a34a;">+102%</div>
+          <div class="cs-sub">$852K median → $1.72M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YEAR-BY-YEAR -->
+  <div class="slider-section">
+    <div class="slider-header">
+      <h2>Year-by-Year Breakdown</h2>
+      <p>Zone-wide figures across all neighborhoods · Select a year for full stats and report access</p>
+    </div>
+
+    <div class="year-tabs">
+      <button class="year-tab active" onclick="showYear('2019', event)">2019</button>
+      <button class="year-tab" onclick="showYear('2020', event)">2020</button>
+      <button class="year-tab" onclick="showYear('2021', event)">2021</button>
+      <button class="year-tab" onclick="showYear('2022', event)">2022</button>
+      <button class="year-tab" onclick="showYear('2023', event)">2023</button>
+      <button class="year-tab" onclick="showYear('2024', event)">2024</button>
+      <button class="year-tab" onclick="showYear('2025', event)">2025</button>
+      <button class="year-tab" onclick="showYear('2026', event)">2026 <span class="badge">YTD</span></button>
+    </div>
+
+    <!-- 2019 -->
+    <div class="year-panel active" id="panel-2019">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">107</div><div class="ys-sub">Closed transactions</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$800K</div><div class="ys-sub">$799,985</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$760K</div><div class="ys-sub">$759,648</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$192</div><div class="ys-sub">Median: $189/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">36</div><div class="ys-sub">Median: 14 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$407K–$1.37M</div><div class="ys-sub">Low to high</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="year-context">
+            <strong>2019 — A Balanced, Diverse Market.</strong> With 107 closings across the zone, 2019 showed healthy demand at every price level. The tight spread between average ($800K) and median ($760K) reflects a well-distributed market without major outliers — Rosebrooke didn't yet exist. Scales Farmstead was actively building out at $400–650K while Taramore was already commanding $850K+. The zone was gaining recognition as Williamson County's prime school-district address.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frf8Am" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2019 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="year-panel" id="panel-2020">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">140</div><div class="ys-sub">Closed transactions</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$813K</div><div class="ys-sub">$812,516</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$733K</div><div class="ys-sub">$733,332</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$203</div><div class="ys-sub">Median: $195/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">29</div><div class="ys-sub">Median: 9 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$408K–$2.40M</div><div class="ys-sub">Low to high</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="year-context">
+            <strong>2020 — Volume Surge, Values Hold.</strong> Sales volume jumped 31% to 140 closings — the second-highest year on record — as pandemic-era relocation brought waves of buyers from higher-cost cities. Despite the increase in volume, the median price dipped slightly from 2019, reflecting a mix effect: Scales Farmstead contributed heavy volume at the $450–650K range. The 9-day median DOM tells the real story — buyers were moving fast.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frfJ18" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2020 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="year-panel" id="panel-2021">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">160</div><div class="ys-sub">Highest year on record</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.12M</div><div class="ys-sub">$1,116,892</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$967K</div><div class="ys-sub">$966,965</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$259</div><div class="ys-sub">Median: $238/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">22</div><div class="ys-sub">Median: 2 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$526K–$9.90M</div><div class="ys-sub">Whistler Farms outlier</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="avg-note">ℹ A $9.9M sale at Whistler Farms in December 2021 pulls the average significantly upward. The median ($967K) is the more representative figure for this year.</div>
+          <div class="year-context">
+            <strong>2021 — The Biggest Year Ever.</strong> 160 closings, a median DOM of 2 days, and average prices up 37% year-over-year. Every price segment of this zone experienced simultaneous appreciation. Rosebrooke broke ground, Tuscany Hills and Morgan Farms saw bidding wars, and Taramore crossed $1M+ across all product types. This was the year the Jordan zone permanently established itself as one of the most in-demand corridors in Middle Tennessee.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frfTAG" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2021 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2022 -->
+    <div class="year-panel" id="panel-2022">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">87</div><div class="ys-sub">Closed transactions</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.56M</div><div class="ys-sub">$1,562,163</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.46M</div><div class="ys-sub">$1,457,250</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$341</div><div class="ys-sub">Median: $325/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">12</div><div class="ys-sub">Median: 3 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$688K–$6.00M</div><div class="ys-sub">Low to high</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="year-context">
+            <strong>2022 — Rate Shock Slashed Volume, Not Prices.</strong> Transactions fell 46% as mortgage rates spiked from 3% to 7%+, but prices continued climbing — the median hit $1.46M. This is the clearest evidence of how resilient this zone is: even when buyers retreat, the sellers who do transact hold their value. A median DOM of 3 days shows urgency from qualified buyers never really disappeared. Allens Green delivered its first batch of $1.5–2M+ homes this year.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frfaET" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2022 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2023 -->
+    <div class="year-panel" id="panel-2023">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">75</div><div class="ys-sub">Closed transactions</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.72M</div><div class="ys-sub">$1,720,848</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.49M</div><div class="ys-sub">$1,487,000</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$355</div><div class="ys-sub">Median: $329/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">43</div><div class="ys-sub">Median: 15 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$695K–$7.20M</div><div class="ys-sub">Low to high</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="avg-note">ℹ Rosebrooke deliveries ($4–7M range) are widening the avg vs. median gap. The $233K spread between average and median is now structural — not distortion.</div>
+          <div class="year-context">
+            <strong>2023 — The Low-Volume Year That Held Its Ground.</strong> Only 75 closings — the lowest since before 2019 — as the rate environment suppressed inventory and sidelined move-up buyers. Despite this, median prices held near $1.49M and average DOM stayed reasonable at 15 days median. Rosebrooke's luxury deliveries began skewing average figures upward. The schools, the amenities, and the location meant that motivated sellers in this zone still found motivated buyers.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frfeEG" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2023 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="year-panel" id="panel-2024">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">84</div><div class="ys-sub">Closed transactions</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$1.87M</div><div class="ys-sub">$1,867,224</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.52M</div><div class="ys-sub">$1,520,000</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$383</div><div class="ys-sub">Median: $335/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">52</div><div class="ys-sub">Median: 14 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$790K–$4.36M</div><div class="ys-sub">Low to high</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="year-context">
+            <strong>2024 — Stability at Scale.</strong> Volume recovered slightly to 84 transactions and prices held firm. The median $1.52M and a 14-day median DOM are strong indicators of underlying demand — even with average DOM of 52 days, which reflects a small number of overpriced listings dragging the average up. Rosebrooke's $2.5–4.4M deliveries are now consistently present in the dataset. The zone's price floor has clearly been reset: under $800K is essentially gone for detached single-family homes.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frfk08" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2024 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="year-panel" id="panel-2025">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">101</div><div class="ys-sub">Closed transactions</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$2.03M</div><div class="ys-sub">$2,028,142</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.64M</div><div class="ys-sub">$1,640,000</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$399</div><div class="ys-sub">Median: $347/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">32</div><div class="ys-sub">Median: 17 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$350K–$6.27M</div><div class="ys-sub">Low to high</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="year-context">
+            <strong>2025 — Volume Returns, Zone Crosses $2M Average.</strong> With 101 closings — the best volume since 2021 — and the average price crossing $2M for the first time, 2025 marked a clear maturation of this zone. The median DOM improving to 17 days while volume climbed is a healthy sign: supply and demand are coming back into balance. Rosebrooke, Arcadia, and new Calistoga deliveries added significant high-end transactions. For the typical buyer looking at the $1–1.8M range, this zone continues to deliver.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frft0I" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2025 Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2026 -->
+    <div class="year-panel" id="panel-2026">
+      <div class="year-panel-grid">
+        <div>
+          <div class="year-stats">
+            <div class="year-stat-box"><div class="ys-label">Sales Count</div><div class="ys-value">22</div><div class="ys-sub">YTD through Mar 2026</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Sale Price</div><div class="ys-value">$2.06M</div><div class="ys-sub">$2,057,268</div></div>
+            <div class="year-stat-box"><div class="ys-label">Median Sale Price</div><div class="ys-value">$1.72M</div><div class="ys-sub">$1,722,000</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Price / SF</div><div class="ys-value">$423</div><div class="ys-sub">Median: $375/sf</div></div>
+            <div class="year-stat-box"><div class="ys-label">Avg Days on Market</div><div class="ys-value">44</div><div class="ys-sub">Median: 52 days</div></div>
+            <div class="year-stat-box"><div class="ys-label">Price Range</div><div class="ys-value" style="font-size:14px;">$779K–$5.30M</div><div class="ys-sub">22 sales YTD</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="year-context">
+            <strong>2026 YTD — Early but Meaningful.</strong> With 22 closings through mid-March, 2026 has more usable data than any individual neighborhood this year — putting it on pace for roughly 100 closings full-year if demand holds. The median of $1.72M is already ahead of 2025's full-year median, and the $375/sf median is a zone record. The higher median DOM (52 days) in this sample reflects a mix of slower-moving luxury listings rather than softening demand across the board. A strong opening to the year.
+          </div>
+          <a class="view-report-btn" href="https://go.realtracs.com/1frfxDu" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12L6 8l3 3 5-6"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+            View Full 2026 YTD Zone Report on Realtracs
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /slider-section -->
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <h2>Shopping the<br><em>Jordan Elementary Zone?</em></h2>
+    <p>Whether you're looking at Scales Farmstead, Taramore, or any of the other neighborhoods in this corridor — the right home and the right price point require local expertise. Let's talk through your options.</p>
+    <a class="cta-btn" href="https://the-jason-kaczmarski-team-springfield-tn.remax.com/ask/9539cc58d5c28bd9c77d6755120798e0">
+      Talk to Jason →
+    </a>
+    <div class="cta-sub">Free consultation &nbsp;·&nbsp; No obligation &nbsp;·&nbsp; Responds same day</div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer">
+  Jason Kaczmarski &nbsp;•&nbsp; RE/MAX 1st Choice &nbsp;•&nbsp;
+  <a href="tel:6153847355">615-384-7355</a>
+  <div class="disclaimer">
+    Data sourced from Realtracs MLS. Information believed to be accurate but not guaranteed. © 2026 Realtracs, Inc.
+    All figures represent closed residential sales zoned for Jordan Elementary School, Williamson County, TN.
+    Report prepared by Jason Kaczmarski, RE/MAX 1st Choice.
+  </div>
+</div>
+
+<script>
+const years    = ['2019','2020','2021','2022','2023','2024','2025','2026*'];
+const avgPrice = [799985, 812516, 1116892, 1562163, 1720848, 1867224, 2028142, 2057268];
+const medPrice = [759648, 733332,  966965, 1457250, 1487000, 1520000, 1640000, 1722000];
+const avgPPSF  = [191.60, 203.37, 258.95, 341.40, 355.43, 383.13, 399.08, 422.68];
+const medPPSF  = [188.59, 194.69, 238.15, 325.43, 329.16, 334.62, 347.15, 375.08];
+const avgDOM   = [36, 29, 22, 12, 43, 52, 32, 44];
+const salesVol = [107, 140, 160, 87, 75, 84, 101, 22];
+
+const chartConfigs = {
+  price: {
+    datasets: [
+      {
+        label: 'Avg Sale Price',
+        data: avgPrice,
+        borderColor: '#1f4fa3',
+        backgroundColor: 'rgba(31,79,163,0.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: years.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
+        pointRadius: years.map((_,i) => i===7 ? 7 : 5),
+        pointHoverRadius: 8,
+        fill: true,
+        tension: 0.35
+      },
+      {
+        label: 'Median Sale Price',
+        data: medPrice,
+        borderColor: '#f0b429',
+        backgroundColor: 'rgba(240,180,41,0.06)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#f0b429',
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        fill: false,
+        tension: 0.35,
+        borderDash: [6,3]
+      }
+    ],
+    yFormat: v => '$'+(v>=1000000?(v/1000000).toFixed(2)+'M':(v/1000).toFixed(0)+'K'),
+    tooltipFormat: v => '$'+Math.round(v).toLocaleString()
+  },
+  ppsf: {
+    datasets: [
+      {
+        label: 'Avg $/SF',
+        data: avgPPSF,
+        borderColor: '#1f4fa3',
+        backgroundColor: 'rgba(31,79,163,0.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: years.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
+        pointRadius: years.map((_,i) => i===7 ? 7 : 5),
+        pointHoverRadius: 8,
+        fill: true,
+        tension: 0.35
+      },
+      {
+        label: 'Median $/SF',
+        data: medPPSF,
+        borderColor: '#f0b429',
+        backgroundColor: 'transparent',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#f0b429',
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        fill: false,
+        tension: 0.35,
+        borderDash: [6,3]
+      }
+    ],
+    yFormat: v => '$'+v.toFixed(0),
+    tooltipFormat: v => '$'+v.toFixed(2)+'/sf'
+  },
+  dom: {
+    datasets: [
+      {
+        label: 'Avg Days on Market',
+        data: avgDOM,
+        borderColor: '#d81f26',
+        backgroundColor: 'rgba(216,31,38,0.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: years.map((_,i) => i===7 ? '#f0b429' : '#d81f26'),
+        pointRadius: years.map((_,i) => i===7 ? 7 : 5),
+        pointHoverRadius: 8,
+        fill: true,
+        tension: 0.35
+      }
+    ],
+    yFormat: v => v+' days',
+    tooltipFormat: v => v+' days avg'
+  },
+  volume: {
+    datasets: [
+      {
+        label: 'Closed Sales',
+        data: salesVol,
+        backgroundColor: years.map((_,i) => i===7 ? 'rgba(240,180,41,0.5)' : 'rgba(31,79,163,0.75)'),
+        borderColor: years.map((_,i) => i===7 ? '#f0b429' : '#1f4fa3'),
+        borderWidth: 2,
+        borderRadius: 6,
+        type: 'bar'
+      }
+    ],
+    yFormat: v => v,
+    tooltipFormat: v => v+' sales'
+  }
+};
+
+let currentChart = null;
+
+function buildChart(type) {
+  if (currentChart) currentChart.destroy();
+  const cfg = chartConfigs[type];
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  currentChart = new Chart(ctx, {
+    type: type==='volume' ? 'bar' : 'line',
+    data: { labels: years, datasets: cfg.datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          position: 'top', align: 'end',
+          labels: { font: { family: "'DM Sans',sans-serif", size: 12 }, color: '#64748b', usePointStyle: true, pointStyleWidth: 10, padding: 20 }
+        },
+        tooltip: {
+          backgroundColor: '#1a1a2e', titleColor: '#f0b429', bodyColor: 'white',
+          padding: 12, cornerRadius: 8,
+          titleFont: { family: "'DM Sans',sans-serif", weight: '600' },
+          bodyFont: { family: "'DM Sans',sans-serif" },
+          callbacks: {
+            label: ctx => ' '+ctx.dataset.label+': '+cfg.tooltipFormat(ctx.parsed.y),
+            afterBody: items => items[0]?.label==='2026*' ? ['22 sales YTD — data will grow'] : []
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: "'DM Sans',sans-serif", size: 12 }, color: '#64748b' } },
+        y: { grid: { color: 'rgba(0,0,0,.05)' }, ticks: { font: { family: "'DM Sans',sans-serif", size: 11 }, color: '#64748b', callback: v => cfg.yFormat(v) } }
+      }
+    }
+  });
+}
+
+function switchChart(type, e) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  buildChart(type);
+}
+
+function showYear(year, e) {
+  document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-'+year).classList.add('active');
+  e.currentTarget.classList.add('active');
+}
+
+window.addEventListener('load', () => buildChart('price'));
+</script>
+</body>
+</html>
